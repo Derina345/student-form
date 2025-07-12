@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Form</title>
+
+    <style>
+        body {
+            background-color: #cfcfc9;
+        }
+
+        #name {
+            border: none;
+            padding: 7px;
+            width: 200px;
+            border-radius: 10px;
+            margin-left: 5px;
+            background-color:rgb(232, 240, 254);
+        }
+
+        #age {
+            border: none;
+            padding: 7px;
+            width: 202px;
+            border-radius: 10px;
+            margin-left: 11px;
+            background-color:rgb(232, 240, 254);
+        }
+
+        #course {
+            border: none;
+            padding: 7px;
+            width: 210px;
+            border-radius: 10px;
+            margin-left: 0px;
+            background-color:rgb(232, 240, 254);
+        }
+
+        #email {
+            border: none;
+            padding: 7px;
+            width: 198px;
+            border-radius: 10px;
+            margin-left: 2px;
+            background-color:rgb(232, 240, 254);
+        }
+
+        #btn {
+            border: solid black;
+
+
+            background-color: rgb(2, 73, 101);
+            color: white;
+            width: 300px;
+            height: 30px;
+            margin-top: 30px;
+
+            cursor: pointer;
+            border-radius: 15px;
+        }
+
+
+
+        h2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #container {
+            border: 1px solid black;
+            background-color:rgb(138, 231, 233);
+            border-radius: 15px;
+            padding: 20px;
+            height: 350px;
+            width: 300px;
+            margin: auto;
+            margin-top: 70px;
+        }
+        
+        #one {
+            background-color:rgb(138, 231, 233);
+            color: black;
+            padding: 10px;
+            width: 100px;
+
+        }
+
+        #two {
+            background-color:rgb(138, 231, 233);
+            color: black;
+            padding: 10px;
+            width: 190px;
+
+        }
+
+        .studentrec {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+
+        #h2 {
+            margin-top: 60px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <h2>STUDENT FORM</h2>
+        <form>
+            <div class="div1">
+                <label>Name:</label>
+                <input id="name" type="text" placeholder="Enter your name" required>
+            </div>
+            <br>
+            <div>
+                <label>Age :</label>
+                <input id="age" type="number" placeholder="Enter your age" required>
+            </div>
+            <br>
+            <div id="gender">
+                <label>Gender:</label>
+                <input type="radio" name="gender" value="male" required>
+                <label>Male</label>
+                <input type="radio" name="gender" value="female">
+                <label>Female</label>
+            </div>
+            <br>
+            <div>
+                <label>Course:</label>
+                <select id="course" required>
+                    <option>----------------Select------------------</option>
+                    <option>HTML</option>
+                    <option>CSS</option>
+                    <option>JAVA</option>
+                    <option>JAVA SCRIPT</option>
+                    <option>REACT JS</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label>E-mail:</label>
+                <input id="email" type="email" placeholder="name@gmail.com" required>
+            </div>
+            <button id="btn">Save</button>
+        </form>
+    </div>
+    <h2 id="h2">STUDENT RECORD</h2>
+    <div class="studentrec">
+        <table border="3" class="database" style="display: block;">
+
+            <thead>
+
+                <tr>
+                    <th id="one">Name</th>
+                    <th id="one">Age</th>
+                    <th id="one">Course</th>
+                    <th id="one">Gender</th>
+                    <th id="two">E-mail</th>
+                    <th id="one">Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentrecbody">
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+
+        var btn = document.getElementById("btn");
+        var insert = document.getElementById("studentrecbody"); 
+
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            var name = document.getElementById('name').value.trim();
+            var age = document.getElementById('age').value.trim();
+            var course = document.getElementById('course').value.trim();
+            var gender = document.querySelector('input[name="gender"]:checked')?.value || '';
+            var email = document.getElementById('email').value.trim();
+
+            
+            if (!name || !age || course === "----------------Select------------------" || !gender || !email) {
+                alert("Please fill out all fields correctly.");
+                return;
+            }
+
+            const trElement = document.createElement('tr');
+
+            const tdElement1 = document.createElement('td');
+            const tdElement2 = document.createElement('td');
+            const tdElement3 = document.createElement('td');
+            const tdElement4 = document.createElement('td');
+            const tdElement5 = document.createElement('td');
+            const tdElement6 = document.createElement('td');
+
+            
+            tdElement1.textContent = name;
+            tdElement2.textContent = age;
+            tdElement3.textContent = course;
+            tdElement4.textContent = gender;
+            tdElement5.textContent = email;
+
+            
+            const delbtn = document.createElement("button");
+            delbtn.textContent = "Delete";
+            delbtn.style.backgroundColor =" rgb(2, 73, 101)";
+            delbtn.style.color = "white";
+            delbtn.style.padding = "5px";
+            delbtn.style.marginLeft="35px"
+            delbtn.style.border = "none";
+            delbtn.style.borderRadius = "5px";
+            delbtn.style.cursor = "pointer";
+           
+
+            delbtn.addEventListener("click", function () {
+                insert.removeChild(trElement);
+            });
+
+            tdElement6.appendChild(delbtn);
+
+            
+            trElement.appendChild(tdElement1);
+            trElement.appendChild(tdElement2);
+            trElement.appendChild(tdElement3);
+            trElement.appendChild(tdElement4);
+            trElement.appendChild(tdElement5);
+            trElement.appendChild(tdElement6);
+
+           
+            insert.appendChild(trElement);
+
+            
+            document.getElementById('name').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('course').selectedIndex = 0;
+            document.getElementById('email').value = '';
+            document.querySelectorAll('input[name="gender"]').forEach(el => el.checked = false);
+        });
+
+    </script>
+
+</body>
+
+</html>
